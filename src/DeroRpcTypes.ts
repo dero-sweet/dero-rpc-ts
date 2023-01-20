@@ -1,4 +1,4 @@
-import * as DeroWalletRpcTypes from './DeroWalletRpcTypes';
+import * as DeroWalletRpcTypes from './DeroRpcWalletTypes';
 
 export type DataType = string;
 
