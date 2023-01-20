@@ -1,5 +1,5 @@
-export * from './DeroWasmWalletMethods';
-
+//@ts-ignore
+export const DeroWasmWindow: DeroWasmWindowI = window;
 export interface DeroWasmWalletResponse {
   value: any;
   err: any;
