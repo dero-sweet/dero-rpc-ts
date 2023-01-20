@@ -1,5 +1,5 @@
 {
-  "name": "dero-rpc-ts-alpha1",
+  "name": "dero-rpc-ts-alpha",
   "version": "0.1.2-alpha",
   "description": "Typescript wrappers for Dero Daemon and Wallet RPC with DeroWasm Support",
   "main": "./lib/index.js",
@@ -69,6 +69,17 @@
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
   "release": {
+    "branches": [
+      "main",
+      {
+        "name": "alpha",
+        "prerelease": true
+      },
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
     "plugins": [
       [
         "@semantic-release/commit-analyzer",
