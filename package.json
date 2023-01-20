@@ -1,6 +1,6 @@
 {
   "name": "dero-rpc-ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Typescript wrappers for Dero Daemon and Wallet RPC with DeroWasm Support",
   "main": "./lib/index.js",
   "files": [
@@ -38,7 +38,6 @@
     "ts",
     "wasm"
   ],
-
   "homepage": "https://github.com/dero-sweet/dero-rpc-ts",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
