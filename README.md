@@ -1,41 +1,24 @@
 # dero-rpc-ts
 
-
-
-> My awesome module
+> Typescript wrappers for Dero Services
+> DeroWasm (DeroHe Go compiled to wasm for running in the browser or node)
+> Dero RPC Bridge API for the browser.
+> Dero Daemon and Wallet RPC
 
 ## Install
 
 ```bash
-npm install my-package-name
+npm install dero-rpc-ts
 ```
 
 ## Usage
 
 ```ts
-import { myPackage } from 'my-package-name';
+import { DeroWasmWalletMethods } from 'dero-rpc-ts';
 
-myPackage('hello');
-//=> 'hello from my package'
+await DeroWasmWalletMethods.DeroWasmInitialize('mainnet',"https://deronode.com.for.real");
+
 ```
 
-## API
-
-### myPackage(input, options?)
-
-#### input
-
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`
-Default: `rainbows`
-
-Lorem ipsum.
+## Todo
+* Fill our rpc calls
