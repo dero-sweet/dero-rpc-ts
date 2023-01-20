@@ -4,3 +4,4 @@ export * as DeroWalletRpcTypes from './DeroWalletRpcTypes';
 export * as DeroRpcTypes from './DeroRpcTypes';
 export * as DeroWalletBridgeMethods from './DeroWalletBridgeMethods';
 export * as DeroRpcBridgeMethods from './DeroRpcBridgeMethods';
+export * as DeroRpc from './DeroRpc';
