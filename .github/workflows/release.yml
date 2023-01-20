@@ -1,9 +1,10 @@
 name: Release
-on:
-  workflow_call:
-    secrets:
-      NPM_TOKEN:
-        required: true
+on: [workflow_dispatch]
+#on:
+#  workflow_call:
+#   secrets:
+#      NPM_TOKEN:
+#        required: true
 
 jobs:
   release:
