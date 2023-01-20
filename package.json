@@ -1,6 +1,6 @@
 {
   "name": "dero-rpc-ts",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "description": "Typescript wrappers for Dero Daemon and Wallet RPC with DeroWasm Support",
   "main": "./lib/index.js",
   "files": [
