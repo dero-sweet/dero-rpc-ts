@@ -1,5 +1,5 @@
 {
-  "name": "dero-rpc-ts-testing",
+  "name": "dero-rpc-ts-alpha",
   "version": "0.1.1-alpha",
   "description": "Typescript wrappers for Dero Daemon and Wallet RPC with DeroWasm Support",
   "main": "./lib/index.js",
