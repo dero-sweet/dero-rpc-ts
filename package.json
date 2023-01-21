@@ -1,13 +1,13 @@
 {
-  "name": "dero-rpc-ts-alphad",
-  "version": "0.1.6-alpha",
+  "name": "dero-rpc-ts",
+  "version": "0.3.1",
   "description": "Typescript wrappers for Dero Daemon and Wallet RPC with DeroWasm Support",
   "main": "./lib/index.js",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "GENERATE_SOURCEMAP=false tsc --project tsconfig.build.json",
     "clean": "rm -rf ./lib/",
     "cm": "cz",
     "lint": "eslint ./src/ --fix",

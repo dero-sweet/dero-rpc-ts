@@ -2,7 +2,7 @@
 import DeroBridgeApi from 'dero-rpc-bridge-api';
 
 import * as DeroRpcTypes from './DeroRpcTypes';
-import * as DeroBridgeWallet from './DeroWalletBridgeMethods';
+import * as DeroBridgeWallet from './DeroRpcBridgeWalletMethods';
 
 export const GetGasEstimate = async (
   api: DeroBridgeApi,
