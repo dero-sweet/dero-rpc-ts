@@ -1,14 +1,4 @@
 //
-//
-//
-// ██████╗ ███████╗██████╗  ██████╗     ████████╗███████╗         ██╗      ██████╗ ██████╗  ██████╗
-// ██╔══██╗██╔════╝██╔══██╗██╔═══██╗    ╚══██╔══╝██╔════╝         ╚██╗     ██╔══██╗██╔══██╗██╔════╝
-// ██║  ██║█████╗  ██████╔╝██║   ██║       ██║   ███████╗    █████╗╚██╗    ██████╔╝██████╔╝██║
-// ██║  ██║██╔══╝  ██╔══██╗██║   ██║       ██║   ╚════██║    ╚════╝██╔╝    ██╔══██╗██╔═══╝ ██║
-// ██████╔╝███████╗██║  ██║╚██████╔╝       ██║   ███████║         ██╔╝     ██║  ██║██║     ╚██████╗
-// ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝        ╚═╝   ╚══════╝         ╚═╝      ╚═╝  ╚═╝╚═╝      ╚═════╝
-//
-//
 // DeroSweet
 //
 
@@ -16,7 +6,7 @@
 import DeroBridgeApi from 'dero-rpc-bridge-api';
 
 import * as DeroRpcTypes from './DeroRpcTypes';
-import { DeroRpc, RpcConnectionDetails } from './DeroRpc';
+import { DeroRpcCall, RpcConnectionDetails } from './DeroRpcUtils';
 
 export const DeroRpcGetBlock = async (
   node: RpcConnectionDetails,
@@ -24,7 +14,7 @@ export const DeroRpcGetBlock = async (
 ) => {
   try {
     const res: DeroRpcTypes.GetBlock_Result = (
-      await DeroRpc({
+      await DeroRpcCall({
         node,
         method: 'DERO.GetBlock',
         params,

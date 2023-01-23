@@ -15,4 +15,4 @@ export * as DeroRpcMethods from './DeroRpcMethods';
 export * as DeroRpcWalletMethods from './DeroRpcWalletMethods';
 
 // rpc wrapper
-export * as DeroRpc from './DeroRpc';
+export * as DeroRpc from './DeroRpcUtils';

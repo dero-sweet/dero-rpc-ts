@@ -11,7 +11,11 @@ interface DeroRpc_Interface {
   node: RpcConnectionDetails;
 }
 
-export const DeroRpc = async ({ node, method, params }: DeroRpc_Interface) => {
+export const DeroRpcCall = async ({
+  node,
+  method,
+  params,
+}: DeroRpc_Interface) => {
   let response;
   const { url, port } = node;
   const body = {
