@@ -1,18 +1,18 @@
 // types for query and response
-export * as DeroRpcWalletTypes from './DeroRpcWalletTypes';
 export * as DeroRpcTypes from './DeroRpcTypes';
+export * as DeroRpcWalletTypes from './DeroRpcWalletTypes';
 
 // wasm
-export * as DeroWasmWalletMethods from './DeroWasmWalletMethods';
-export * as DeroWasmWalletTypes from './DeroWasmWalletTypes';
+export * as DeroWasm from './DeroWasm';
+export * as DeroWasmTypes from './DeroWasmTypes';
 
 // rpc bridge api
-export * as DeroRpcBridgeMethods from './DeroRpcBridgeMethods';
-export * as DeroRpcBridgeWalletMethods from './DeroRpcBridgeWalletMethods';
+export * as DeroRpcBridge from './DeroRpcBridge';
+export * as DeroRpcBridgeWallet from './DeroRpcBridgeWallet';
 
-// rpcs
-export * as DeroRpcMethods from './DeroRpcMethods';
-export * as DeroRpcWalletMethods from './DeroRpcWalletMethods';
-
-// rpc wrapper
+// rpc
 export * as DeroRpc from './DeroRpc';
+export * as DeroRpcWallet from './DeroRpcWallet';
+
+// rpc call wrapper
+export * as DeroRpcUtils from './DeroRpcUtils';
