@@ -1,9 +1,9 @@
 # dero-rpc-ts
-
 > Typescript wrappers for Dero Services
-> DeroWasm (DeroHe Go compiled to wasm for running in the browser or node)
-> Dero RPC Bridge API for the browser.
-> Dero Daemon and Wallet RPC
+
+DeroWasm (DeroHe Go compiled to wasm for running in the browser or server side)
+* Dero RPC Bridge API for the browser.
+* Dero Daemon and Wallet RPC
 
 # BETA software and is still in active development and is subject to change.
 
@@ -13,26 +13,29 @@
 npm install dero-rpc-ts
 ```
 
-## Usage
+## Usage for Rpc Bridge
 ```ts
-import { DeroRpcBridgeWalletMethods } from 'dero-rpc-ts';
+import { DeroRpcBridgeWallet } from 'dero-rpc-ts';
 
-await DeroRpcBridgeWalletMethods.GetBalance(api,scid);
+await DeroRpcBridgeWallet.GetBalance(api,scid);
 
 ```
 
 
-## WASM
+## Usage for WASM
 ```ts
-import { DeroWasmWalletMethods } from 'dero-rpc-ts';
+import { DeroWasm } from 'dero-rpc-ts';
 
-// the wasm from Go is dumped right into the window so we wrap it like this so its easily usable
+await DeroWasm.DeroWasmInitialize('mainnet',"https://your.dero.node.com");
+
+// for direct access to the Wasm
+// the current implementation of dero WASM from Go is dumped right into the window so we wrap it like this to make it easily usable
 export const DeroWasmWindow: DeroWasmWindowI = window
-await DeroWasmWalletMethods.DeroWasmInitialize('mainnet',"https://deronode.com.for.real");
+
 
 ```
 
 ## Todo
-* Straight RPC calls to daemon and wallet
+* Implement RPC calls to daemon and wallet
 * Finish the WASM methods
 

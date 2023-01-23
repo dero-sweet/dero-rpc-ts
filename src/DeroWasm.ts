@@ -75,10 +75,10 @@ export const DeroRecoverWalletFromSeed = async (
   return value;
 };
 
-export const DeroWasmInitialize = async () => {
-  const env = 'mainnet';
-  const daemonEndpoint = 'https://dero-api.mysrv.cloud';
-
+export const DeroWasmInitialize = async (
+  env: string,
+  daemonEndpoint: string
+) => {
   const res = DeroWasmWindow.Initialize(env, daemonEndpoint);
   console.log('set dero daemon addr', res);
   return res;

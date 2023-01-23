@@ -93,3 +93,14 @@ export interface DeroWasmWindowI {
   'DERO.GetBlock'?: any;
   DeroWasmWalletGetBalance: any;
 }
+
+export interface FastRegResI {
+  busy: boolean;
+  hr?: number; //hashrate
+  c?: number; //count
+  txId?: string;
+  txHex?: string;
+  addr?: string;
+  wordSeed?: string;
+  hexSeed?: string;
+}
