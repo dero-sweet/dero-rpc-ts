@@ -2,11 +2,11 @@
 import DeroBridgeApi from 'dero-rpc-bridge-api';
 import * as DeroWalletRpcTypes from './DeroRpcWalletTypes';
 import { Transfer } from './DeroRpcWalletTypes';
-import * as DeroRpc from './DeroRpcBridgeMethods';
-import { GetRandomAddress } from './DeroRpcBridgeMethods';
+import * as DeroRpc from './DeroRpcBridge';
+import { GetRandomAddress } from './DeroRpcBridge';
 import * as DeroRpcTypes from './DeroRpcTypes';
 import { DataTypes } from './DeroRpcTypes';
-import * as DeroBridgeWallet from './DeroRpcBridgeWalletMethods';
+import * as DeroBridgeWallet from './DeroRpcBridgeWallet';
 
 export interface GasErrorI {
   code: number;

@@ -1,4 +1,4 @@
-import { DeroWasmWindow } from './DeroWasmWalletTypes';
+import { DeroWasmWindow } from './DeroWasmTypes';
 export interface DeroCreateNewWalletParams {
   password: string;
 }
