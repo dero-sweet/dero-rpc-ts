@@ -1,14 +1,15 @@
 import { WalletResponse, DeroWasmWindow } from './DeroWasmTypes';
+import { DeroWasmWalletResponse } from '../lib/DeroWasmWalletTypes';
 
 //
 // Wallet
 //
 
-export interface DeroCreateNewWalletParams {
+export interface CreateNewWalletParams {
   password: string;
 }
 
-export interface DeroCreateNewWalletResult {
+export interface CreateNewWalletResult {
   hexSeed: string;
   fileData: ArrayBuffer; //Uint8Array
   address: string;
@@ -16,10 +17,10 @@ export interface DeroCreateNewWalletResult {
   json?: any;
 }
 
-export const CreateNewWallet = async (params: DeroCreateNewWalletParams) => {
+export const CreateNewWallet = async (params: CreateNewWalletParams) => {
   const res = DeroWasmWindow.CreateNewWallet(params.password);
   if (res.value) {
-    const value: DeroCreateNewWalletResult = {
+    const value: CreateNewWalletResult = {
       ...res.value,
       json: convertFileDataToJson(res.value.fileData),
     };
@@ -38,13 +39,13 @@ export const CloseAllWallets = async () => {
   return res;
 };
 
-export interface DeroWasmOpenWalletI {
+export interface OpenWalletParams {
   walletKey: string;
   password: string;
   fileData: any; // Uint8Array
 }
 
-export const DeroWasmOpenWallet = async (params: DeroWasmOpenWalletI) => {
+export const OpenWallet = async (params: OpenWalletParams) => {
   const res = DeroWasmWindow.OpenWallet(
     params.walletKey,
     params.password,
@@ -54,50 +55,53 @@ export const DeroWasmOpenWallet = async (params: DeroWasmOpenWalletI) => {
   return res;
 };
 
-export interface DeroWasmRecoverWalletFromHexSeedParams {
+export interface RecoverWalletFromHexSeedParams {
   password: string;
   hexSeed: string;
 }
 
-export const DeroWasmRecoverWalletFromHexSeed = async (
-  params: DeroWasmRecoverWalletFromHexSeedParams
+export const RecoverWalletFromHexSeed = async (
+  params: RecoverWalletFromHexSeedParams
 ) => {
   const res = DeroWasmWindow.RecoverWalletFromHexSeed(
     params.password,
     params.hexSeed
   );
-  console.log(res);
-  if (res.value) {
-    const value: DeroCreateNewWalletResult = {
+  if (!res.value) return res;
+  const result: RecoverWalletFromSeedResult = {
+    ...res,
+    value: {
       ...res.value,
       json: convertFileDataToJson(res.value.fileData),
-    };
-    res.value = value;
-  }
-  return res;
+    },
+  };
+  return result;
 };
 
-export interface DeroWasmRecoverWalletFromSeedParams {
+export interface RecoverWalletFromSeedParams {
   password: string;
   seed: string;
 }
+export interface RecoverWalletFromSeedResult extends WalletResponse {
+  value: CreateNewWalletResult;
+}
 
-export const DeroWasmRecoverWalletFromSeed = async (
-  params: DeroWasmRecoverWalletFromSeedParams
+export const RecoverWalletFromSeed = async (
+  params: RecoverWalletFromSeedParams
 ) => {
   const res = DeroWasmWindow.RecoverWalletFromSeed(
     params.password,
     params.seed
   );
-  console.log(res);
-  if (res.value) {
-    const value: DeroCreateNewWalletResult = {
+  if (!res.value) return res;
+  const result: RecoverWalletFromSeedResult = {
+    ...res,
+    value: {
       ...res.value,
       json: convertFileDataToJson(res.value.fileData),
-    };
-    res.value = value;
-  }
-  return res;
+    },
+  };
+  return result;
 };
 
 // todo RecoverWalletFromDisk
@@ -105,14 +109,12 @@ export const DeroWasmRecoverWalletFromSeed = async (
 // WalletGetTopoHeight
 // WalletGetAddress
 
-export interface DeroWasmWalletGetBalanceI {
+export interface WalletGetBalanceParams {
   walletKey: string;
   scid: string;
 }
 
-export const DeroWasmWalletGetBalance = async (
-  params: DeroWasmWalletGetBalanceI
-) => {
+export const WalletGetBalance = async (params: WalletGetBalanceParams) => {
   // the result is stored in the window interface with this key
   const asyncKey = 'DeroWasmWalletGetBalance';
   const res = DeroWasmWindow.WalletGetBalance(

@@ -214,6 +214,7 @@ export const ScInvoke = async (
   }
 };
 
+// todo refactor the sc building out to be usable by wasm and rpc
 export const CallSc = async (
   api: DeroBridgeApi,
   params: {

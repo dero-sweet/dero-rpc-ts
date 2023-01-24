@@ -73,7 +73,7 @@ export const GetBlockCount = async (
     console.log(err);
   }
 };
-//todo fix the method name its broken
+//todo this is not supported by the current derowasm build
 export const GetBlockHeaderByHash = async (
   api: DeroBridgeApi,
   params: DeroRpcTypes.GetBlockHeaderByHash_Params
@@ -88,7 +88,7 @@ export const GetBlockHeaderByHash = async (
     console.log(err);
   }
 };
-//todo fix the method name its broken
+//todo this is not supported by the current derowasm build
 export const GetBlockHeaderByTopoHeight = async (
   api: DeroBridgeApi,
   params: DeroRpcTypes.GetBlockHeaderByTopoHeight_Params

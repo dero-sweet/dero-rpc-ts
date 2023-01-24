@@ -5,7 +5,7 @@ export interface RpcConnectionDetails {
   port: number;
 }
 
-interface DeroRpc_Interface {
+export interface DeroRpc_Interface {
   method: string;
   params?: any;
   node: RpcConnectionDetails;
