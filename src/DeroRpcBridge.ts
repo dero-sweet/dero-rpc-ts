@@ -249,10 +249,10 @@ export const NameToAddress = async (
     const res: DeroRpcTypes.NameToAddress_Result = (
       await api.daemon('name-to-address', params)
     ).data.result;
-    ///console.log(res)
+    //console.log(res)
     return res;
   } catch (err) {
-    console.error('NameToAddress', err);
+    //console.error('NameToAddress', err);
   }
 };
 
@@ -264,7 +264,7 @@ export const SendRawTransaction = async (
     const res: DeroRpcTypes.SendRawTransaction_Result = (
       await api.daemon('send-raw-transaction', params)
     ).data.result;
-    //        console.log(res)
+    //console.log(res)
     return res;
   } catch (err) {
     console.error('SendRawTransaction ', err);
@@ -279,7 +279,7 @@ export const SubmitBlock = async (
     const res: DeroRpcTypes.SubmitBlock_Result = (
       await api.daemon('submit-block', params)
     ).data.result;
-    //        console.log(res)
+    //console.log(res)
     return res;
   } catch (err) {
     console.error('SubmitBlock ', err);
@@ -294,7 +294,7 @@ export const GetLastBlockHeader = async (
     const res: DeroRpcTypes.GetLastBlockHeader_Result = (
       await api.daemon('get-last-block-header', params)
     ).data.result;
-    //        console.log(res)
+    //console.log(res)
     return res;
   } catch (err) {
     console.error('GetLastBlockHeader ', err);

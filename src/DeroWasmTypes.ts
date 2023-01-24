@@ -10,16 +10,11 @@ export interface DeroWasmWalletResponseNull {
   err: null;
 }
 
-//todo work out the explicit responses
-/*export interface WalletEncryptedDataResult extends DeroWasmWalletResponse {
-  value:string
-}*/
-
 //@ts-ignore
 // in index.tsx export const DeroWasmWindow: DeroWasmWindowI = window
 
 export interface DeroWasmWindowI {
-  /// Methods exposed in g45 # Dero Wallet WASM
+  // Methods exposed in g45 # Dero Wallet WASM
   CreateNewWallet: (password: string) => DeroWasmWalletResponse;
   CloseWallet: (walletKey: string) => DeroWasmWalletResponse;
   CloseAllWallets: () => DeroWasmWalletResponse;
@@ -29,7 +24,6 @@ export interface DeroWasmWindowI {
     fileData: any, // Uint8Array
     online: boolean
   ) => DeroWasmWalletResponse;
-
   RecoverWalletFromSeed: (
     password: string,
     seed: string
@@ -71,7 +65,9 @@ export interface DeroWasmWindowI {
     walletKey: string,
     targetLeadingZero: number
   ) => DeroWasmWalletResponse; // registration is slow - difficulty to high for browser
-
+  //
+  // daemon node
+  //
   Initialize: (env: string, daemonEndpoint: string) => DeroWasmWalletResponse;
   DecodeHexTransaction: (txHex: string) => DeroWasmWalletResponse;
   VerifyAddress: (addrString: string) => DeroWasmWalletResponse;
@@ -79,13 +75,12 @@ export interface DeroWasmWindowI {
   DaemonSetAddress: (
     asyncKey: string,
     daemonEndpoint: string
-  ) => DeroWasmWalletResponseNull;
+  ) => DeroWasmWalletResponse;
   DaemonCall: (
     asyncKey: string,
     method: string,
     data: string
   ) => DeroWasmWalletResponse;
-
   DaemonGetTopoHeight: () => DeroWasmWalletResponse;
   FastRegister: (workerKey: string) => DeroWasmWalletResponse; // fast register by pieswap*!/*/
 

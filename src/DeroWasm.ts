@@ -1,4 +1,9 @@
 import { DeroWasmWindow } from './DeroWasmTypes';
+
+//
+// Wallet
+//
+
 export interface DeroCreateNewWalletParams {
   password: string;
 }
@@ -17,25 +22,27 @@ export interface DeroCreateNewWalletResult {
 }
 
 export const CreateNewWallet = async (params: DeroCreateNewWalletParams) => {
-  console.log('Create new Wallet');
-  //let res = WasmWindow[DeroWasmWalletMethodTypes.CreateNewWallet](params.password)
-  //@ts-ignore
   const res = DeroWasmWindow.CreateNewWallet(params.password);
-  if (!res.value) return;
+  if (res.value) {
+    console.log('there is value');
+  }
   const value: DeroCreateNewWalletResult = res.value;
-  console.log('new wallet ', res);
-  return value;
+  res.value = value;
+  return res;
 };
 
 export const FastRegister = async () => {
-  console.log('Fast Register');
-  //@ts-ignore
-  const res = window.FastRegister(1);
-  if (!res.value) return;
-  const value = res.value;
+  const asyncKey = 'FastRegister';
+  const res = DeroWasmWindow.FastRegister(asyncKey);
 
-  return value;
+  return res;
 };
+/*
+let fastRegResp = window.FastRegister(1)
+console.log("fastRegResp",fastRegResp)
+let key = `RegistrationStatus_<number: 1>`
+console.log("window",window[key])
+*/
 
 export interface DeroRecoverWalletFromHexSeedParams {
   password: string;
@@ -45,13 +52,14 @@ export interface DeroRecoverWalletFromHexSeedParams {
 export const DeroRecoverWalletFromHexSeed = async (
   params: DeroRecoverWalletFromHexSeedParams
 ) => {
-  //@ts-ignore
   const res = DeroWasmWindow.RecoverWalletFromHexSeed(
     params.password,
     params.hexSeed
   );
   console.log(res);
-  if (!res.value) return;
+  if (res.value) {
+    console.log('there is value');
+  }
   const value: DeroCreateNewWalletResult = res.value;
   return value;
 };
@@ -75,26 +83,31 @@ export const DeroRecoverWalletFromSeed = async (
   return value;
 };
 
+//
+// Daemon Node
+//
+
 export const DeroWasmInitialize = async (
   env: string,
   daemonEndpoint: string
 ) => {
   const res = DeroWasmWindow.Initialize(env, daemonEndpoint);
-  console.log('set dero daemon addr', res);
+
+  return res;
+};
+
+export const DeroWasmDecodeHexTransaction = async (txHex: string) => {
+  const key = 'DaemonSetAddressResult';
+  const res = DeroWasmWindow.DecodeHexTransaction(txHex);
+  if (!res.value) return;
+  // todo need type for this
   return res;
 };
 export const DeroWasmDaemonSetAddress = async (addr: string) => {
-  const key = 'DaemonSetAddressResult';
-  //@ts-ignore
-  const res = window.DaemonSetAddress(key, addr);
-  console.log('set dero daemon addr', res);
+  const asyncKey = 'DaemonSetAddressResult';
+  const res = DeroWasmWindow.DaemonSetAddress(asyncKey, addr);
   return res;
 };
-/*
-let fastRegResp = window.FastRegister(1)
-console.log("fastRegResp",fastRegResp)
-let key = `RegistrationStatus_<number: 1>`
-console.log("window",window[key])*/
 
 export const DeroWasmDaemonGetTopoHeight = async () => {
   //@ts-ignore
@@ -108,7 +121,8 @@ export interface DeroWasmDaemonCallParams {
   method: string;
   data: string;
 }
-
+// many of the dero wasm calls are async
+// you must provide a key to find the returned data in the window interface
 export const DeroWasmDaemonCall = async (params: DeroWasmDaemonCallParams) => {
   const res = DeroWasmWindow.DaemonCall(
     params.asyncKey,
