@@ -1,6 +1,4 @@
 import { WalletResponse, DeroWasmWindow } from './DeroWasmTypes';
-import { DeroWasmWalletResponse } from '../lib/DeroWasmWalletTypes';
-
 //
 // Wallet
 //
