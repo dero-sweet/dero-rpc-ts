@@ -1,5 +1,6 @@
 //@ts-ignore
 export const DeroWasmWindow: DeroWasmWindowI = window;
+
 export interface WalletResponse {
   value: any;
   err: any;
@@ -46,7 +47,12 @@ export interface DeroWasmWindowI {
     walletKey: string,
     data: string
   ) => WalletResponse;
-  WalletGetTransfers: (walletKey: string, coinbase: boolean) => WalletResponse;
+  WalletGetTransfers: (
+    walletKey: string,
+    coinbase: boolean,
+    inTxs: boolean,
+    outTxs: boolean
+  ) => WalletResponse;
   WalletSendTransaction: (
     asyncKey: string,
     walletKey: string,

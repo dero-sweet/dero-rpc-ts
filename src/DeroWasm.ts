@@ -126,6 +126,7 @@ export const DeroWasmWalletGetBalance = async (
 export interface WalletGetSeedResponse extends WalletResponse {
   value: string;
 }
+
 export const WalletGetSeed = async (walletKey: string) => {
   const res: WalletGetSeedResponse = DeroWasmWindow.WalletGetSeed(walletKey);
   return res;
@@ -134,6 +135,7 @@ export const WalletGetSeed = async (walletKey: string) => {
 export interface WalletGetHexSeedResponse extends WalletResponse {
   value: string;
 }
+
 export const WalletGetHexSeed = async (walletKey: string) => {
   const res: WalletGetHexSeedResponse =
     DeroWasmWindow.WalletGetHexSeed(walletKey);
@@ -143,16 +145,72 @@ export const WalletGetHexSeed = async (walletKey: string) => {
 export interface WalletIsRegisteredResponse extends WalletResponse {
   value: boolean;
 }
+
 export const WalletIsRegistered = async (walletKey: string) => {
   const res: WalletIsRegisteredResponse =
     DeroWasmWindow.WalletIsRegistered(walletKey);
   return res;
 };
 
-// todo wallet transfers
-// WalletTransfer
-// WalletGetTransfers
-// WalletSendTransaction
+// Transfers
+export interface WalletTransferParams {
+  asyncKey: string;
+  walletKey: string;
+  data: string;
+}
+
+export const WalletTransfer = async ({
+  asyncKey,
+  walletKey,
+  data,
+}: WalletTransferParams) => {
+  const res = DeroWasmWindow.WalletTransfer(asyncKey, walletKey, data);
+  return res;
+};
+
+export interface WalletSendTransactionParams {
+  //result is stored in asyncKey in the window interface
+  asyncKey: string;
+  walletKey: string;
+  txHex: string;
+}
+
+export const WalletSendTransaction = async ({
+  asyncKey,
+  walletKey,
+  data,
+}: WalletTransferParams) => {
+  const res = DeroWasmWindow.WalletSendTransaction(asyncKey, walletKey, data);
+  return res;
+};
+
+export interface WalletGetTransfersParams {
+  //result is stored in asyncKey in the window interface
+  walletKey: string;
+  coinbase: boolean;
+  inTxs?: boolean;
+  outTxs?: boolean;
+}
+
+export interface WalletGetTransfersResponse extends WalletResponse {
+  // todo check on this type
+  value: string;
+}
+
+export const WalletGetTransfers = async ({
+  walletKey,
+  coinbase = true,
+  inTxs = true,
+  outTxs = true,
+}: WalletGetTransfersParams) => {
+  const res: WalletGetTransfersResponse = DeroWasmWindow.WalletGetTransfers(
+    walletKey,
+    coinbase,
+    inTxs,
+    outTxs
+  );
+  return res;
+};
 
 // todo wallet register the old slow way
 
@@ -172,8 +230,11 @@ console.log("window",window[key])
 //
 // Daemon Node
 //
-
-export const Initialize = async (env: string, daemonEndpoint: string) => {
+export interface InitializeParams {
+  env: string;
+  daemonEndpoint: string;
+}
+export const Initialize = async ({ env, daemonEndpoint }: InitializeParams) => {
   const res = DeroWasmWindow.Initialize(env, daemonEndpoint);
   return res;
 };
@@ -181,6 +242,7 @@ export const Initialize = async (env: string, daemonEndpoint: string) => {
 export interface DecodeHexTransactionResponse extends WalletResponse {
   value: string;
 }
+
 export const DecodeHexTransaction = async (txHex: string) => {
   const res: DecodeHexTransactionResponse =
     DeroWasmWindow.DecodeHexTransaction(txHex);
@@ -190,6 +252,7 @@ export const DecodeHexTransaction = async (txHex: string) => {
 export interface VerifyAddressResponse extends WalletResponse {
   value: boolean;
 }
+
 export const VerifyAddress = async (addrString: string) => {
   const res: VerifyAddressResponse = DeroWasmWindow.VerifyAddress(addrString);
   return res;
@@ -212,6 +275,7 @@ export const DaemonSetAddress = async (addr: string) => {
 export interface DaemonGetTopoHeightResponse extends WalletResponse {
   value: string;
 }
+
 export const DaemonGetTopoHeight = async () => {
   const res: DaemonGetTopoHeightResponse = DeroWasmWindow.DaemonGetTopoHeight();
   return res;
@@ -222,6 +286,7 @@ export interface DaemonCallParams {
   method: string;
   data: string;
 }
+
 export const DaemonCall = async (params: DaemonCallParams) => {
   const res = DeroWasmWindow.DaemonCall(
     params.asyncKey,
@@ -241,6 +306,7 @@ export const GetBlock = async () => {
   console.log('get block', res);
   return res;
 };
+//todo implement more of the dero daemon rpc calls using DaemonCall
 
 //
 // Utils
@@ -254,6 +320,7 @@ export function hex_to_ascii(str1: string) {
   }
   return str;
 }
+
 export const toHexString = (bytes: any) => {
   //@ts-ignore
   return bytes.reduce(
