@@ -17,14 +17,14 @@ export interface CreateNewWalletResult {
   json?: any;
 }
 
+export interface WalletResult extends WalletResponse {
+  value: CreateNewWalletResult;
+}
+
 export const CreateNewWallet = async (params: CreateNewWalletParams) => {
-  const res = DeroWasmWindow.CreateNewWallet(params.password);
+  const res: WalletResult = DeroWasmWindow.CreateNewWallet(params.password);
   if (res.value) {
-    const value: CreateNewWalletResult = {
-      ...res.value,
-      json: convertFileDataToJson(res.value.fileData),
-    };
-    res.value = value;
+    res.value.json = convertFileDataToJson(res.value.fileData);
   }
   return res;
 };
@@ -63,45 +63,32 @@ export interface RecoverWalletFromHexSeedParams {
 export const RecoverWalletFromHexSeed = async (
   params: RecoverWalletFromHexSeedParams
 ) => {
-  const res = DeroWasmWindow.RecoverWalletFromHexSeed(
+  const res: WalletResult = DeroWasmWindow.RecoverWalletFromHexSeed(
     params.password,
     params.hexSeed
   );
-  if (!res.value) return res;
-  const result: RecoverWalletFromSeedResult = {
-    ...res,
-    value: {
-      ...res.value,
-      json: convertFileDataToJson(res.value.fileData),
-    },
-  };
-  return result;
+  if (res.value) {
+    res.value.json = convertFileDataToJson(res.value.fileData);
+  }
+  return res;
 };
 
 export interface RecoverWalletFromSeedParams {
   password: string;
   seed: string;
 }
-export interface RecoverWalletFromSeedResult extends WalletResponse {
-  value: CreateNewWalletResult;
-}
 
 export const RecoverWalletFromSeed = async (
   params: RecoverWalletFromSeedParams
 ) => {
-  const res = DeroWasmWindow.RecoverWalletFromSeed(
+  const res: WalletResult = DeroWasmWindow.RecoverWalletFromSeed(
     params.password,
     params.seed
   );
-  if (!res.value) return res;
-  const result: RecoverWalletFromSeedResult = {
-    ...res,
-    value: {
-      ...res.value,
-      json: convertFileDataToJson(res.value.fileData),
-    },
-  };
-  return result;
+  if (res.value) {
+    res.value.json = convertFileDataToJson(res.value.fileData);
+  }
+  return res;
 };
 
 // todo RecoverWalletFromDisk
@@ -236,6 +223,7 @@ export interface InitializeParams {
   env: string;
   daemonEndpoint: string;
 }
+
 export const Initialize = async ({ env, daemonEndpoint }: InitializeParams) => {
   const res = DeroWasmWindow.Initialize(env, daemonEndpoint);
   return res;
