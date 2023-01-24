@@ -1,7 +1,7 @@
 # dero-rpc-ts
 > Typescript wrappers for Dero Services
 
-DeroWasm (DeroHe Go compiled to wasm for running in the browser or server side)
+* DeroWasm (DeroHe Go compiled to wasm for running in the browser or server side)
 * Dero RPC Bridge API for the browser.
 * Dero Daemon and Wallet RPC
 

@@ -1,6 +1,6 @@
 //@ts-ignore
 export const DeroWasmWindow: DeroWasmWindowI = window;
-export interface DeroWasmWalletResponse {
+export interface WalletResponse {
   value: any;
   err: any;
 }
@@ -15,74 +15,65 @@ export interface DeroWasmWalletResponseNull {
 
 export interface DeroWasmWindowI {
   // Methods exposed in g45 # Dero Wallet WASM
-  CreateNewWallet: (password: string) => DeroWasmWalletResponse;
-  CloseWallet: (walletKey: string) => DeroWasmWalletResponse;
-  CloseAllWallets: () => DeroWasmWalletResponse;
+  CreateNewWallet: (password: string) => WalletResponse;
+  CloseWallet: (walletKey: string) => WalletResponse;
+  CloseAllWallets: () => WalletResponse;
   OpenWallet: (
     walletKey: string,
     password: string,
     fileData: any, // Uint8Array
     online: boolean
-  ) => DeroWasmWalletResponse;
-  RecoverWalletFromSeed: (
-    password: string,
-    seed: string
-  ) => DeroWasmWalletResponse;
+  ) => WalletResponse;
+  RecoverWalletFromSeed: (password: string, seed: string) => WalletResponse;
   RecoverWalletFromHexSeed: (
     password: string,
     hexSeed: string
-  ) => DeroWasmWalletResponse;
-  RecoverWalletFromDisk: (
-    password: string,
-    fileData: string
-  ) => DeroWasmWalletResponse;
-  WalletGetEncryptedData: (walletKey: string) => DeroWasmWalletResponse;
-  WalletGetTopoHeight: (walletKey: string) => DeroWasmWalletResponse;
-  WalletGetAddress: (walletKey: string) => DeroWasmWalletResponse;
+  ) => WalletResponse;
+  RecoverWalletFromDisk: (password: string, fileData: string) => WalletResponse;
+  WalletGetEncryptedData: (walletKey: string) => WalletResponse;
+  WalletGetTopoHeight: (walletKey: string) => WalletResponse;
+  WalletGetAddress: (walletKey: string) => WalletResponse;
   WalletGetBalance: (
     asyncKey: string,
     walletKey: string,
     scId: string
-  ) => DeroWasmWalletResponse;
-  WalletGetSeed: (walletKey: string) => DeroWasmWalletResponse;
-  WalletGetHexSeed: (walletKey: string) => DeroWasmWalletResponse;
-  WalletIsRegistered: (walletKey: string) => DeroWasmWalletResponse;
+  ) => WalletResponse;
+  WalletGetSeed: (walletKey: string) => WalletResponse;
+  WalletGetHexSeed: (walletKey: string) => WalletResponse;
+  WalletIsRegistered: (walletKey: string) => WalletResponse;
   WalletTransfer: (
     asyncKey: string,
     walletKey: string,
     data: string
-  ) => DeroWasmWalletResponse;
-  WalletGetTransfers: (
-    walletKey: string,
-    coinbase: boolean
-  ) => DeroWasmWalletResponse;
+  ) => WalletResponse;
+  WalletGetTransfers: (walletKey: string, coinbase: boolean) => WalletResponse;
   WalletSendTransaction: (
     asyncKey: string,
     walletKey: string,
     txHex: string
-  ) => DeroWasmWalletResponse;
+  ) => WalletResponse;
   WalletRegister: (
     walletKey: string,
     targetLeadingZero: number
-  ) => DeroWasmWalletResponse; // registration is slow - difficulty to high for browser
+  ) => WalletResponse; // registration is slow - difficulty to high for browser
   //
   // daemon node
   //
-  Initialize: (env: string, daemonEndpoint: string) => DeroWasmWalletResponse;
-  DecodeHexTransaction: (txHex: string) => DeroWasmWalletResponse;
-  VerifyAddress: (addrString: string) => DeroWasmWalletResponse;
-  CheckSeed: (seed: string) => DeroWasmWalletResponse;
+  Initialize: (env: string, daemonEndpoint: string) => WalletResponse;
+  DecodeHexTransaction: (txHex: string) => WalletResponse;
+  VerifyAddress: (addrString: string) => WalletResponse;
+  CheckSeed: (seed: string) => WalletResponse;
   DaemonSetAddress: (
     asyncKey: string,
     daemonEndpoint: string
-  ) => DeroWasmWalletResponse;
+  ) => WalletResponse;
   DaemonCall: (
     asyncKey: string,
     method: string,
     data: string
-  ) => DeroWasmWalletResponse;
-  DaemonGetTopoHeight: () => DeroWasmWalletResponse;
-  FastRegister: (workerKey: string) => DeroWasmWalletResponse; // fast register by pieswap*!/*/
+  ) => WalletResponse;
+  DaemonGetTopoHeight: () => WalletResponse;
+  FastRegister: (workerKey: string) => WalletResponse; // fast register by pieswap*!/*/
 
   /// Async Keys holding results from method wrappers
   'DERO.GetBlock'?: any;

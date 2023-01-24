@@ -1,4 +1,4 @@
-import { DeroWasmWalletResponse, DeroWasmWindow } from './DeroWasmTypes';
+import { WalletResponse, DeroWasmWindow } from './DeroWasmTypes';
 
 //
 // Wallet
@@ -54,13 +54,13 @@ export const DeroWasmOpenWallet = async (params: DeroWasmOpenWalletI) => {
   return res;
 };
 
-export interface DeroRecoverWalletFromHexSeedParams {
+export interface DeroWasmRecoverWalletFromHexSeedParams {
   password: string;
   hexSeed: string;
 }
 
-export const DeroRecoverWalletFromHexSeed = async (
-  params: DeroRecoverWalletFromHexSeedParams
+export const DeroWasmRecoverWalletFromHexSeed = async (
+  params: DeroWasmRecoverWalletFromHexSeedParams
 ) => {
   const res = DeroWasmWindow.RecoverWalletFromHexSeed(
     params.password,
@@ -77,13 +77,13 @@ export const DeroRecoverWalletFromHexSeed = async (
   return res;
 };
 
-export interface DeroRecoverWalletFromSeedParams {
+export interface DeroWasmRecoverWalletFromSeedParams {
   password: string;
   seed: string;
 }
 
-export const DeroRecoverWalletFromSeed = async (
-  params: DeroRecoverWalletFromSeedParams
+export const DeroWasmRecoverWalletFromSeed = async (
+  params: DeroWasmRecoverWalletFromSeedParams
 ) => {
   const res = DeroWasmWindow.RecoverWalletFromSeed(
     params.password,
@@ -123,10 +123,31 @@ export const DeroWasmWalletGetBalance = async (
   return res;
 };
 
-// todo
-// WalletGetSeed
-// WalletGetHexSeed
-// WalletIsRegistered
+export interface WalletGetSeedResponse extends WalletResponse {
+  value: string;
+}
+export const WalletGetSeed = async (walletKey: string) => {
+  const res: WalletGetSeedResponse = DeroWasmWindow.WalletGetSeed(walletKey);
+  return res;
+};
+
+export interface WalletGetHexSeedResponse extends WalletResponse {
+  value: string;
+}
+export const WalletGetHexSeed = async (walletKey: string) => {
+  const res: WalletGetHexSeedResponse =
+    DeroWasmWindow.WalletGetHexSeed(walletKey);
+  return res;
+};
+
+export interface WalletIsRegisteredResponse extends WalletResponse {
+  value: boolean;
+}
+export const WalletIsRegistered = async (walletKey: string) => {
+  const res: WalletIsRegisteredResponse =
+    DeroWasmWindow.WalletIsRegistered(walletKey);
+  return res;
+};
 
 // todo wallet transfers
 // WalletTransfer
@@ -152,37 +173,29 @@ console.log("window",window[key])
 // Daemon Node
 //
 
-export const DeroWasmInitialize = async (
-  env: string,
-  daemonEndpoint: string
-) => {
+export const Initialize = async (env: string, daemonEndpoint: string) => {
   const res = DeroWasmWindow.Initialize(env, daemonEndpoint);
   return res;
 };
 
-export interface DeroWasmDecodeHexTransactionResponse
-  extends DeroWasmWalletResponse {
+export interface DecodeHexTransactionResponse extends WalletResponse {
   value: string;
 }
-export const DeroWasmDecodeHexTransaction = async (txHex: string) => {
-  const res: DeroWasmDecodeHexTransactionResponse =
+export const DecodeHexTransaction = async (txHex: string) => {
+  const res: DecodeHexTransactionResponse =
     DeroWasmWindow.DecodeHexTransaction(txHex);
   return res;
 };
 
-export interface DeroWasmVerifyAddressResponse extends DeroWasmWalletResponse {
+export interface VerifyAddressResponse extends WalletResponse {
   value: boolean;
 }
-export const DeroWasmVerifyAddress = async (addrString: string) => {
-  const res: DeroWasmVerifyAddressResponse =
-    DeroWasmWindow.VerifyAddress(addrString);
+export const VerifyAddress = async (addrString: string) => {
+  const res: VerifyAddressResponse = DeroWasmWindow.VerifyAddress(addrString);
   return res;
 };
 
-export interface DeroWasmCheckSeedResponse extends DeroWasmWalletResponse {
-  value: boolean;
-}
-export const DeroWasmCheckSeed = async (addrString: string) => {
+export const CheckSeed = async (addrString: string) => {
   const res = DeroWasmWindow.CheckSeed(addrString);
   // for some reason if the checkseed
   // fails the go wasm wrapper returns an error in err and doesnt return a bool for value
@@ -190,28 +203,26 @@ export const DeroWasmCheckSeed = async (addrString: string) => {
   return res;
 };
 
-export const DeroWasmDaemonSetAddress = async (addr: string) => {
-  const asyncKey = 'DaemonSetAddressResult';
+export const DaemonSetAddress = async (addr: string) => {
+  const asyncKey = 'DeroDaemonSetAddressResult';
   const res = DeroWasmWindow.DaemonSetAddress(asyncKey, addr);
   return res;
 };
 
-export interface DeroWasmDaemonGetTopoHeightResponse
-  extends DeroWasmWalletResponse {
+export interface DaemonGetTopoHeightResponse extends WalletResponse {
   value: string;
 }
-export const DeroWasmDaemonGetTopoHeight = async () => {
-  const res: DeroWasmDaemonGetTopoHeightResponse =
-    DeroWasmWindow.DaemonGetTopoHeight();
+export const DaemonGetTopoHeight = async () => {
+  const res: DaemonGetTopoHeightResponse = DeroWasmWindow.DaemonGetTopoHeight();
   return res;
 };
 
-export interface DeroWasmDaemonCallParams {
+export interface DaemonCallParams {
   asyncKey: string;
   method: string;
   data: string;
 }
-export const DeroWasmDaemonCall = async (params: DeroWasmDaemonCallParams) => {
+export const DaemonCall = async (params: DaemonCallParams) => {
   const res = DeroWasmWindow.DaemonCall(
     params.asyncKey,
     params.method,
