@@ -23,6 +23,7 @@ await DeroRpcBridgeWallet.GetBalance(api,scid);
 
 
 ## Usage for WASM
+> The dero wasm support is very limited and will most likely change. These are some helpers for the meantime.
 ```ts
 import { DeroWasm } from 'dero-rpc-ts';
 
