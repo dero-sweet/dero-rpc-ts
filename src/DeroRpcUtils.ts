@@ -37,7 +37,7 @@ export const DeroRpcCall = async ({
       headers: {
         'Content-Type': 'application/json',
         //credentials: 'include',
-        //'Authorization': authString,  //Authorization: "Basic ZG9ua2V5OmRvbmtleQ==",
+        //'Authorization': authString,  //Authorization: "Basic ...==",
       },
       method: 'POST',
     });
